@@ -4,14 +4,21 @@
 		<meta charset='utf-8'>
 		{% extends 'base.html' %}
 		<title>공간 생성</title>
+<<<<<<< refs/remotes/origin/master
         <META http-equiv=”Expires” content=”-1″>
 <META http-equiv=”Pragma” content=”no-cache”>
 <META http-equiv=”Cache-Control” content=”No-Cache”>
+=======
+>>>>>>> github start
 	</head>
 	<body>
 		{% block content %}
 			<h2>공간 생성</h2>
+<<<<<<< refs/remotes/origin/master
 			<form method="post" enctype="multipart/form-data">
+=======
+			<form method="POST" enctype="multipart/form-data">
+>>>>>>> github start
 				{% csrf_token %}
 				{{ create_space_form.as_p }}
 				<input type="submit" name="" value="공간 생성">

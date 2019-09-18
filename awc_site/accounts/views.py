@@ -33,7 +33,12 @@ def login(request):
 
     else:
         login_form = LoginForm()
+<<<<<<< refs/remotes/origin/master
         return render(request, 'accounts/login.html', {'login_form': login_form})
+=======
+        msg2 = "<p>테스트입니다</p>"
+        return render(request, 'accounts/login.html', {'login_form': login_form, 'msg': msg2})
+>>>>>>> github start
 
 
 # 로그아웃
