@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load svg %}
+    <title>{%  block title %}{% endblock %}</title>
+
+    <title>Bootstrap 4 Website Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+        .icon{
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="{% url 'accounts:shared_main' %}">AWC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">메뉴</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">메뉴</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">메뉴</a>
+            </li>
+        </ul>
+    </div>
+    <div id="end" class="flexbox">
+        {% if user.is_authenticated %}<!--로그인 성공시 if문 -->
+
+            <i class="icon">{% svg 'home' %}</i><a>&nbsp;</a>
+            <a href="{% url 'accounts:sign_up' %}" style="color:white">{{user.get_username}}'s list&nbsp;&nbsp;&nbsp;</a>
+            <i class="icon" style="background-color:white">{% svg 'logout' %}</i><a>&nbsp;&nbsp;</a>
+            <a href="{% url 'accounts:logout' %}" style="color:white">Logout</a>
+
+            </div>
+        {% else %}
+            <!--로그인 안했을때 else문  -->
+            <div id="end" class="flexbox">
+
+                <i class="icon">{% svg 'person' %}</i><a>&nbsp;</a>
+                <a href="{% url 'accounts:sign_up' %}" style="color:white">Sign Up&nbsp;&nbsp;&nbsp;</a>
+                <i class="icon">{% svg 'login' %}</i><a>&nbsp;&nbsp;</a>
+                <a href="{% url 'accounts:login' %}" style="color:white">Login</a>
+            </div>
+        {% endif %}
+
+</nav>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>
