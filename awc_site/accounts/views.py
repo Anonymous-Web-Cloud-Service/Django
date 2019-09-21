@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from accounts.forms import UserForm, LoginForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
+from django.urls import reverse
 
 
 def sign_up(request):
@@ -27,18 +28,14 @@ def login(request):
         member = authenticate(username=email, password=password)
         if member is not None:
             auth_login(request, member)
-            return render(request, 'main.html', {'user': member})
+            return HttpResponseRedirect(reverse('index'))
         else:
             return HttpResponse('로그인 실패입니다.')
 
     else:
         login_form = LoginForm()
-<<<<<<< refs/remotes/origin/master
-        return render(request, 'accounts/login.html', {'login_form': login_form})
-=======
-        msg2 = "<p>테스트입니다</p>"
-        return render(request, 'accounts/login.html', {'login_form': login_form, 'msg': msg2})
->>>>>>> github start
+
+    return render(request, 'accounts/login.html', {'login_form': login_form})
 
 
 # 로그아웃
@@ -50,7 +47,3 @@ def logout(request):
 # 메인화면 표시
 def index(request):
     return render(request, 'main.html', {})
-
-
-def shared_main(request):
-    return render(request, 'main.html')

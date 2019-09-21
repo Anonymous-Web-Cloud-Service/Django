@@ -2,25 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<<<<<<< refs/remotes/origin/master
     {% extends 'accounts/../base.html' %}
-=======
     {% extends 'base.html' %}
->>>>>>> github start
     <title>{% block title %} -Done{% endblock %}</title>
 </head>
 <body>
 {% block content %}
 <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 panel panel-default">
-            <div class="alert alert-info">
-                공간 생성 완료.<br/>
-                공간 링크 : <a href="/space/{{space_name}}"> 127.0.0.1:8000/space/{{space_name}}</a>
-            </div>
-            <a class="btn btn-info" href="/">Move to main</a>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+        <div class="alert alert-info">
+            공간 생성 완료.<br/>
+            공간 링크 : <a href="/space/{{space_name}}"> 127.0.0.1:8000/space/{{space_name}}</a>
         </div>
-        <div class="col-md-2"></div>
+        <a class="btn btn-info" href="/">Move to main</a>
+    </div>
+    <div class="col-md-2"></div>
 </div>
 {% endblock %}
 </body>

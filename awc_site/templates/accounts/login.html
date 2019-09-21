@@ -2,28 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<<<<<<< refs/remotes/origin/master
-    {% extends 'accounts/../base.html' %}
-    {% load static %}
-{% load staticfiles %}
-=======
     {% extends 'base.html' %}
->>>>>>> github start
+    {% load static %}
+    {% load staticfiles %}
     <title>{%  block title %}-Login{% endblock %}</title>
 </head>
 <body>
 {% block content %}
 <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 panel panel-default">
-            <div class="alert alert-info">아이디와 비밀번호를 입력해주세요.</div>
-            <form action="" method="post">
-				{% csrf_token %}
-                {{login_form.as_p}}
-                <input class="btn btn-primary" type="submit" value="Login">
-            </form>
-        </div>
-        <div class="col-md-2"></div>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+        <div class="alert alert-info">아이디와 비밀번호를 입력해주세요.</div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{login_form.as_p}}
+            <input class="btn btn-primary" type="submit" value="Login">
+        </form>
+    </div>
+    <div class="col-md-2"></div>
 </div>
 {% endblock %}
 </div>

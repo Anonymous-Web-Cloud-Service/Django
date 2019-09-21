@@ -19,7 +19,7 @@ import accounts.views
 
 
 urlpatterns = [
-    path('', accounts.views.shared_main),
+    path('', accounts.views.index, name='index'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('summernote/', include('django_summernote.urls')),

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< refs/remotes/origin/master
     {% load static %}
     {% load svg %}
     <title>{%  block title %}{% endblock %}</title>
@@ -28,7 +27,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="{% url 'accounts:shared_main' %}">AWC</a>
+    <a class="navbar-brand" href="{% url 'index' %}">AWC</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,78 +47,27 @@
     <div id="end" class="flexbox">
         {% if user.is_authenticated %}<!--로그인 성공시 if문 -->
 
-            <i class="icon">{% svg 'home' %}</i><a>&nbsp;</a>
-            <a href="{% url 'accounts:sign_up' %}" style="color:white">{{user.get_username}}'s list&nbsp;&nbsp;&nbsp;</a>
-            <i class="icon" style="background-color:white">{% svg 'logout' %}</i><a>&nbsp;&nbsp;</a>
-            <a href="{% url 'accounts:logout' %}" style="color:white">Logout</a>
+        <i class="icon">{% svg 'home' %}</i><a>&nbsp;</a>
+        <a href="{% url 'accounts:sign_up' %}" style="color:white">{{user.get_username}}'s list&nbsp;&nbsp;&nbsp;</a>
+        <i class="icon" style="background-color:white">{% svg 'logout' %}</i><a>&nbsp;&nbsp;</a>
+        <a href="{% url 'accounts:logout' %}" style="color:white">Logout</a>
 
-            </div>
-        {% else %}
-            <!--로그인 안했을때 else문  -->
-            <div id="end" class="flexbox">
+    </div>
+    {% else %}
+    <!--로그인 안했을때 else문  -->
+    <div id="end" class="flexbox">
 
-                <i class="icon">{% svg 'person' %}</i><a>&nbsp;</a>
-                <a href="{% url 'accounts:sign_up' %}" style="color:white">Sign Up&nbsp;&nbsp;&nbsp;</a>
-                <i class="icon">{% svg 'login' %}</i><a>&nbsp;&nbsp;</a>
-                <a href="{% url 'accounts:login' %}" style="color:white">Login</a>
-            </div>
-        {% endif %}
+        <i class="icon">{% svg 'person' %}</i><a>&nbsp;</a>
+        <a href="{% url 'accounts:sign_up' %}" style="color:white">Sign Up&nbsp;&nbsp;&nbsp;</a>
+        <i class="icon">{% svg 'login' %}</i><a>&nbsp;&nbsp;</a>
+        <a href="{% url 'accounts:login' %}" style="color:white">Login</a>
+    </div>
+    {% endif %}
 
 </nav>
 {% block content %}
 
 {% endblock %}
 =======
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <title> {% block title %}{% endblock %}</title>
-
-
-</head>
-<style>
-    footer{
-        position: fixed;
-        bottom : 0;
-        width :100%;
-    }
-</style>
-<body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">AWC</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-          <li><a href="#">메뉴</a></li>
-          <li><a href="#">메뉴</a></li>
-          <li><a href="#">메뉴</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          {% if user.is_authenticated %}<!--로그인 성공시 if문 -->
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{user.get_username}}'s list</a></li>
-          <li><a href="{% url 'accounts:logout' %}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-          {% else %}
-          <!--로그인 안했을때 else문  -->
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> 로그인해주세요.</a></li>
-          <li><a href="{% url 'accounts:sign_up' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          {% endif %}
-
-      </ul>
-    </div>
-  </div>
-</nav>
-{% block content %} {% endblock %}
->>>>>>> github start
 </body>
 </html>

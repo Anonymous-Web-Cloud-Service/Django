@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     {% extends 'base.html' %}
-<<<<<<< refs/remotes/origin/master
     {% load static %}
-
-=======
->>>>>>> github start
     <title>{% block title %} -Registration {% endblock %}</title>
 </head>
 <body>
 {% block content %}
-    <style>
+<style>
         .errorlist {
             color: red;
         }
@@ -31,25 +27,25 @@
         }
     </style>
 
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 panel panel-default">
-            <div class="test">
-                <div class="alert alert-info"></div>
-                <form method="POST" enctype="multipart/form-data" class="sign_up" style="font-size:30px;">
-                    {% csrf_token %}
-                    {% for form in user_form %}
-                        <div>{{ form.label_tag }}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+        <div class="test">
+            <div class="alert alert-info"></div>
+            <form method="POST" enctype="multipart/form-data" class="sign_up" style="font-size:30px;">
+                {% csrf_token %}
+                {% for form in user_form %}
+                <div>{{ form.label_tag }}
 
-                        {{ form }}
-                        {{ form.errors }} </div>
-                    {% endfor %}
-                    <input class="btn btn-primary" type="submit" value="가입하기">
-                </form>
-            </div>
+                    {{ form }}
+                    {{ form.errors }} </div>
+                {% endfor %}
+                <input class="btn btn-primary" type="submit" value="가입하기">
+            </form>
         </div>
-        <div class="col-md-2"></div>
     </div>
+    <div class="col-md-2"></div>
+</div>
 {% endblock %}
 </body>
 </html>

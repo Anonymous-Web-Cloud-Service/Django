@@ -42,10 +42,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'accounts',
     'space',
-<<<<<<< refs/remotes/origin/master
     'svg',
-=======
->>>>>>> github start
 ]
 
 MIDDLEWARE = [
@@ -139,10 +136,7 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
-<<<<<<< refs/remotes/origin/master
-
-SVG_DIRS=[
+# Static files
+SVG_DIRS = [
     os.path.join(BASE_DIR, 'static/svg/')
 ]
-=======
->>>>>>> github start
