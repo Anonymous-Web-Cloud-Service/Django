@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+        table {
+            border-collapse: collapse;
+            text-align: left;
+            line-height: 1.5;
+        }
+        table thead th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            color: #369;
+            border-bottom: 3px solid #036;
+        }
+        table tbody th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background: #f3f6f7;
+        }
+        table td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table.table thead th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            color: #369;
+            border-bottom: 3px solid #036;
+        }
+        table.table td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+
+    </style>
+<div class="container" style="outline-color: black">
+
+    <h5 hidden id="boardname">{{ space.space_name }}</h5>
+    <h5 hidden id="filename">{{ post.post_file }}</h5>
+</div>
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-12 panel panel-default">
+            <div class="alert alert-info">다운로드를 원하시면 클릭하세요!<br>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>제목</th>
+                <th>작성날짜</th>
+                <th>다운로드</th>
+                <th>파일 검사결과</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr>
+                <td>
+                    <a >{{ post.post_title }}</a>
+                </td>
+                <td>{{ post.post_date }}</td>
+                <td> <div class="download">
+                    {% if post.post_file %}
+                    {{ post.post_file }}
+                    <input type="submit" id="downloadfile" value="다운로드"
+                           onclick=downloadObject(document.getElementById('boardname').innerHTML,document.getElementById('filename').innerHTML)>
+                    {% else %}
+                    <p>첨부파일 없음</p>
+                    {%endif%}
+
+                </div></td>
+                <td id="malware_result">{{ post.malware_result }}</td>
+            </tr>
+            <td colspan="4">
+                {{ post.post_contents|safe }}
+            </td>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        malware = document.getElementById("malware_result").innerHTML;
+        if(malware == -1 ) malware = "결과없음";
+        else if(malware == 0) malware = "안전";
+        else if(malware == 1) malware = "위험";
+        document.getElementById("malware_result").innerHTML = malware;
+    </script>
+</div>
+{% endblock %}

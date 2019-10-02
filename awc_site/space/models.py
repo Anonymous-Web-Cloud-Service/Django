@@ -31,9 +31,9 @@ class Post(models.Model):
     writer = models.CharField(max_length=50)
     post_title = models.CharField(max_length=50)
     post_contents = models.TextField(blank=True)
-    post_file = models.FileField(blank=True, null=True)
+    post_file = models.FileField(blank=True, null=True, unique=False)
     post_date = models.DateTimeField(auto_now_add=True)
-    # post_attached_file = models.FileField
+    malware_result = models.IntegerField(default=-1)
 
     class Meta:
         ordering = ['-post_date']

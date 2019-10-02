@@ -2,35 +2,130 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    {% extends 'base.html' %}
+    {% extends 'accounts/../base.html' %}
     <title>{{ space.space_name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 {% block content %}
-<h2>공간 이름 : {{ space.space_name }}</h2>
-<p>공간 카테고리 : {{ space.space_category }}</p>
-{% if posts %}
-<table width="500px" height="200px">
-    <tr>
-        <th>글제목</th>
-        <th>내용</th>
-        <th>작성자</th>
-    </tr>
-    {% for post in posts %}
-    <tr>
-        <td>{{ post.post_title }}</td>
-        <td>{{ post.post_contents }}</td>
-        <td>{{ post.writer }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<style>
+        table {
+            border-collapse: collapse;
+            text-align: left;
+            line-height: 1.5;
+        }
+        table thead th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            color: #369;
+            border-bottom: 3px solid #036;
+        }
+        table tbody th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background: #f3f6f7;
+        }
+        table td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table.table thead th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            color: #369;
+            border-bottom: 3px solid #036;
+        }
+        table.table td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
 
-{% else %}
-<p>등록된 게시글이 없습니다.</p>
-{% endif %}
-{% if user.is_authenticated %}
-<a href="{% url 'space:write_post' space_name=space.space_name %}" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> 글쓰기</a>
-{% endif %}
+    </style>
+<script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12 panel panel-default">
+            <div class="alert alert-info">{{ space.space_name }}에 오신걸 환영합니다.<br>
+                "{{ space.space_category }}" 카테고리에 대한 페이지입니다.
+            </div>
+
+        </div>
+        <h2>필터링 검색</h2>
+        {% if posts %}
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <br><br>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>글제목</th>
+                    <th>작성자</th>
+                </tr>
+                </thead>
+                <tbody id="myTable">
+                {% for post in posts %}
+                <tr>
+                    <td><a href="{% url 'space:post_detail' space_name=space.space_name post_id=post.id %}">{{ post.post_title }}</a></td>
+                    <td>{{ post.writer }}</td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>등록된 게시글이 없습니다.</p>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'space:write_post' space_name=space.space_name %}" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span>새로운 글 추가하기 </a>
+        {% endif %}
+        <ul class="pagination justify-content-center">
+            {% if posts.has_previous %}
+            <li class ="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}"  style="color:Black"> 이전 </a></li>
+            {% else %}
+            <li class ="page-item"><a class="page-link" href="#" style="color:Black"> 이전 </a></li>
+            {% endif %}
+
+            {% for i in page_count %}
+            {% if i == posts.number %}
+            <li class="page-item"><a class="page-link" href="#" style="color:Black">{{ i }} </a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }} </a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if posts.has_next %}
+            <li class ="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}" style="color:Black"> 다음 </a></li>
+            {% else %}
+            <li class ="page-item"><a class="page-link" href="#" style="color:Black"> 다음 </a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+</div>
+
 
 {% endblock %}
 </body>

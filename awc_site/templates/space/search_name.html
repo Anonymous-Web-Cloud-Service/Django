@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'search_base.html' %}
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <title>테스트용 서치 폼</title>
+</head>
+<body>
+{% block content%}
+<div class="container">
+    <form action="{% url 'space:search_space_list' %}" method="get">
+    <select name="search_option">
+        <option value="space_name">공간이름으로 검색</option>
+        <option value="space_category">공간 카테고리로 검색</option>
+    </select>
+    <input type="text" name="q" value="{{ q }}">
+    <input type="submit" value="공간 검색">
+</form>
+</div>
+{% endblock %}
+</body>
+</html>

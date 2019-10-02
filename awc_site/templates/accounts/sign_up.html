@@ -35,10 +35,11 @@
             <form method="POST" enctype="multipart/form-data" class="sign_up" style="font-size:30px;">
                 {% csrf_token %}
                 {% for form in user_form %}
-                <div>{{ form.label_tag }}
-
+                <div>
+                    {{ form.label_tag }}
                     {{ form }}
-                    {{ form.errors }} </div>
+                    {{ form.errors }}
+                </div>
                 {% endfor %}
                 <input class="btn btn-primary" type="submit" value="가입하기">
             </form>

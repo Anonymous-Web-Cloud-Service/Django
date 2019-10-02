@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import RegexValidator
 from space.models import Space, Post
-from django_summernote.widgets import SummernoteWidget
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
 # 공간(space) 생성 폼
@@ -101,9 +101,11 @@ class CreateSpaceForm(forms.ModelForm):
 
 # 게시글 작성 폼
 class WritePostForm(forms.ModelForm):
+    
+    
     class Meta:
         model = Post
-        fields = ('writer', 'post_title', 'post_contents', 'post_file')
+        fields = ('post_title', 'post_contents', 'post_file')
         widgets = {
             'post_contents': SummernoteWidget(),
         }
@@ -113,10 +115,12 @@ class WritePostForm(forms.ModelForm):
         super(WritePostForm, self).__init__(*args, **kwargs)
         self.fields['post_file'].required = False
 
-    # save() 오버라이딩
+    # save() 재정의
     def save(self, **kwargs):
         post = super(WritePostForm, self).save(commit=False)
         post.space = kwargs.get('space', None)
+        post.writer = kwargs.get('writer', None)
+        post.malware_result = kwargs.get('check_result', None)
         post.save()
 
         return post

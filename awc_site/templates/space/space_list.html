@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    {% extends 'base.html' %}
+    <title>퍼블릭 공간 목록</title>
+    <title>{{ space.space_name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+{% block content %}
+<style>
+        table {
+            border-collapse: collapse;
+            text-align: left;
+            line-height: 1.5;
+        }
+        table thead th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            color: #369;
+            border-bottom: 3px solid #036;
+        }
+        table tbody th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background: #f3f6f7;
+        }
+        table td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table.table thead th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            color: #369;
+            border-bottom: 3px solid #036;
+        }
+        table.table td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+<script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+    </script>
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-12 panel panel-default">
+            <div class="alert alert-info">원하는 커뮤니티를 클릭하세요!<br>
+            </div>
+        </div>
+        {% if search_flag %}
+        <h2>커뮤니티 검색 결과</h2>
+        {% else %}
+        <h2>현재 개설된 커뮤니티 목록입니다.</h2>
+        {% endif %}
+
+        {% if spaces %}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>공간 이름</th>
+                <th>카테고리</th>
+                <th>개설 일자</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+
+            {% for space in spaces %}
+            <tr>
+                <td >
+                    <a href="/space/{{ space.space_name }}">{{ space.space_name }}</a>
+                </td>
+                <td>{{ space.space_category }}</td>
+                <td>{{ space.date_created }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+    <p>등록된 공간이 없습니다</p>
+    {% endif %}
+    <ul class="pagination justify-content-center">
+      {% if space.has_previous %}
+      <li class ="page-item"><a class="page-link" href="?page={{ space.previous_page_number }}"  style="color:Black"> 이전 </a></li>
+      {% else %}
+      <li class ="page-item"><a class="page-link" href="#" style="color:Black"> 이전 </a></li>
+      {% endif %}
+
+      {% for i in page_count %}
+      {% if i == space.number %}
+      <li class="page-item"><a class="page-link" href="#" style="color:Black">{{ i }} </a></li>
+      {% else %}
+      <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }} </a></li>
+      {% endif %}
+      {% endfor %}
+
+      {% if space.has_next %}
+      <li class ="page-item"><a class="page-link" href="?page={{ space.next_page_number }}" style="color:Black"> 다음 </a></li>
+      {% else %}
+      <li class ="page-item"><a class="page-link" href="#" style="color:Black"> 다음 </a></li>
+      {% endif %}
+    </ul>
+    </div>
+  </div>
+
+
+
+{% endblock %}
+</body>
+</html>

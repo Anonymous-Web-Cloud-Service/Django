@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +26,7 @@ SECRET_KEY = 'b#x!m!an2ylxibbcrmz2h$+d5asxb81b4)2%^sb5ht2+q_f-=q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '*']
 
 
 # Application definition
@@ -109,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # User 모델 설정
-AUTH_USER_MODEL = "accounts.Member" 
+AUTH_USER_MODEL = "accounts.Member"
 
 # Authentication 백엔드 설정
 AUTHENTICATION_BACKENDS = ["accounts.backends.EmailBackend"]
@@ -130,8 +129,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [STATIC_DIR, ]
 
 # Media files
 MEDIA_URL = '/media/'
@@ -140,3 +141,28 @@ MEDIA_ROOT = MEDIA_DIR
 SVG_DIRS = [
     os.path.join(BASE_DIR, 'static/svg/')
 ]
+
+SUMMERNOTE_THEME = 'bs4'
+SUMMERNOTE_CONFIG = {
+        'iframe': True,
+        'disable_attachment': False,
+}
+
+LOGGING = {
+            'version': 1,
+                'disable_existing_loggers': False,
+                    'handlers': {
+                                'file': {
+                                                'level': 'DEBUG',
+                                                            'class': 'logging.FileHandler',
+                                                                        'filename': '/home/radia/awc_site/debug.log',
+                                                                                },
+                                    },
+                        'loggers': {
+                                    'django': {
+                                                    'handlers': ['file'],
+                                                                'level': 'DEBUG',
+                                                                            'propagate': True,
+                                                                                    },
+                                        },
+                        }

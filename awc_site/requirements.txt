@@ -1,0 +1,15 @@
+boto3-1.9.234
+django-2.2.5
+keras-2.2.5
+mysqlclient-1.4.4
+numpy-1.17.2
+opencv_python-4.1.1.26
+Pillow-6.1.0
+pyunpack-0.1.2
+requests-2.22.0
+tensorflow-1.14.0
+urllib3-1.25.5
+uWSGI-2.0.18
+virustotal_python-0.0.7
+django-summernote-0.8.11.4
+django-inline-svg-0.1.1
